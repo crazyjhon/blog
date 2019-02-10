@@ -1,0 +1,107 @@
+{{extend './_layouts/home.html'}}
+{{block 'style'}}
+<style>
+    html,body{
+        padding:0;
+        margin:0;
+        height:100%;
+        background-color: #eee;
+    }
+    .wrapper{
+        min-width:720px;
+        margin:0 auto;
+    }
+    .main{
+        margin:0 15px;
+    }
+    .sideBar{
+        background-color: #456;
+        border-radius:5px;
+        padding:15px;
+        /*margin:0 -15px;*/
+    }
+    .content{
+        background-color: #fff;
+        border-radius:5px;
+        padding:15px;
+    }
+    .article_content{
+        max-height:35px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        white-space: initial;
+        /*color: #333;*/
+        text-align:left;
+    }
+    .tooltip-inner{
+        background: #fafafa !important;
+        text-align: left !important;
+        color:#363636 !important;
+        border:1px solid #dedede;
+        max-width: 400px !important;
+    }
+    .tooltip-arrow{
+        border-left-color: #ddd !important;
+        opacity: 1 !important;
+    }
+    .tooltip {
+        opacity: 1 !important;
+        top: 32.5px;
+        left: -35px;
+
+    }
+
+
+</style>
+{{/block}}
+{{ block 'content' }}
+<div class="wrapper" style="position: relative">
+    {{ include './_layouts/header.html' }}
+    <div class="main">
+        <div class="row">
+            <div class=" col-md-2 col-sm-2 col-xs-2 ">
+                <div class="sideBar">
+
+                </div>
+            </div>
+            <div class=" col-md-10 col-sm-10 col-xs-10">
+                <div class="content">
+                    {{ each message.article }}
+                    <div class="panel panel-default" >
+                        <div class="panel-body" >
+                            <div class="media">
+                                <a class="media-left"  href="#">
+                                    <img data-toggle="tooltip" title="用户：{{ $value.username }}" data-placement="left"  src="..{{ $value.avatar }}" style="width: 64px; height: 64px;">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading"><a href=""  >{{ $value.title }}</a></h4>
+                                    <p class="article_content">
+                                        {{ $value.content }}
+                                    </p>
+                                    <div>
+                                        <p class="pull-left">{{ $value.created_time.toLocaleString() }}</p>
+                                        <p class="pull-right"><span>浏览(18)</span><span>留言</span>(4)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{ /each }}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{{ /block}}
+{{ block 'script'}}
+<script>
+    $(function () {
+        $("[data-toggle='tooltip']").tooltip();
+    });
+</script>
+{{ /block }}
